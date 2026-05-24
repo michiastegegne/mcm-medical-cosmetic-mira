@@ -12,6 +12,7 @@ const setHeaderState = () => {
 if (menuToggle) {
   menuToggle.addEventListener("click", () => {
     const isOpen = header.classList.toggle("is-open");
+    document.body.classList.toggle("no-scroll", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
     menuToggle.setAttribute("aria-label", isOpen ? "Menü schliessen" : "Menü öffnen");
   });
@@ -20,11 +21,22 @@ if (menuToggle) {
 document.querySelectorAll(".nav a").forEach((link) => {
   link.addEventListener("click", () => {
     header.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
     if (menuToggle) {
       menuToggle.setAttribute("aria-expanded", "false");
       menuToggle.setAttribute("aria-label", "Menü öffnen");
     }
   });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  header.classList.remove("is-open");
+  document.body.classList.remove("no-scroll");
+  if (menuToggle) {
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Menü öffnen");
+  }
 });
 
 window.addEventListener("scroll", setHeaderState, { passive: true });

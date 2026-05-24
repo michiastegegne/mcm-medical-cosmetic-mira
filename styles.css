@@ -18,6 +18,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -27,6 +28,10 @@ body {
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.55;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 img {
@@ -49,7 +54,7 @@ a {
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
   gap: 24px;
-  padding: 16px clamp(18px, 4vw, 56px);
+  padding: calc(16px + env(safe-area-inset-top, 0px)) clamp(18px, 4vw, 56px) 16px;
   color: var(--white);
   transition:
     background 180ms ease,
@@ -151,7 +156,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 46px;
+  min-height: 48px;
   padding: 12px 18px;
   border: 1px solid transparent;
   font-weight: 700;
@@ -171,8 +176,8 @@ a {
 
 .menu-toggle {
   display: none;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   color: currentColor;
   background: rgba(255, 255, 255, 0.12);
@@ -186,6 +191,7 @@ a {
 
 .hero {
   position: relative;
+  min-height: 92vh;
   min-height: 92svh;
   display: grid;
   align-items: end;
@@ -274,7 +280,7 @@ h3 {
 }
 
 .inner-page main {
-  padding-top: 78px;
+  padding-top: calc(78px + env(safe-area-inset-top, 0px));
 }
 
 .page-hero {
@@ -867,21 +873,33 @@ svg {
 @media (max-width: 920px) {
   .site-header {
     grid-template-columns: 1fr auto auto;
+    gap: 12px;
   }
 
   .nav {
-    position: absolute;
-    top: 100%;
-    right: 16px;
-    left: 16px;
+    position: fixed;
+    top: calc(72px + env(safe-area-inset-top, 0px));
+    right: max(14px, env(safe-area-inset-right, 0px));
+    left: max(14px, env(safe-area-inset-left, 0px));
     display: none;
     flex-direction: column;
+    max-height: calc(100dvh - 96px - env(safe-area-inset-top, 0px));
+    overflow-y: auto;
     padding: 10px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
     color: var(--ink);
     background: rgba(255, 250, 244, 0.98);
     box-shadow: var(--shadow);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    padding: 12px 14px;
+    font-size: 1rem;
   }
 
   .site-header.is-open .nav {
@@ -910,14 +928,27 @@ svg {
 
 @media (max-width: 680px) {
   .site-header {
-    gap: 10px;
-    padding: 12px 14px;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: calc(10px + env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) 10px
+      max(14px, env(safe-area-inset-left, 0px));
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+    font-size: 0.78rem;
   }
 
   .brand strong {
-    max-width: 170px;
+    max-width: min(58vw, 230px);
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.92rem;
   }
 
   .brand small {
@@ -929,16 +960,55 @@ svg {
   }
 
   .hero {
-    min-height: 94svh;
-    padding: 112px 18px 28px;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(94px + env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px))
+      max(18px, env(safe-area-inset-left, 0px));
+  }
+
+  .hero-media {
+    background-position: 58% center;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(0deg, rgba(20, 18, 16, 0.82) 0%, rgba(20, 18, 16, 0.42) 58%, rgba(20, 18, 16, 0.18) 100%),
+      linear-gradient(90deg, rgba(20, 18, 16, 0.62), rgba(20, 18, 16, 0.22));
   }
 
   .hero-content {
-    padding-bottom: 26px;
+    padding-bottom: 20px;
   }
 
   h1 {
-    font-size: clamp(2.9rem, 18vw, 4.7rem);
+    font-size: clamp(2.45rem, 13.5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  h2 {
+    font-size: clamp(1.95rem, 10vw, 3rem);
+  }
+
+  h3 {
+    font-size: 1.16rem;
+  }
+
+  .hero-content > p,
+  .page-hero p:last-child,
+  .intro > p,
+  .split-copy > p,
+  .booking p {
+    font-size: 1rem;
+  }
+
+  .page-hero {
+    padding: calc(54px + env(safe-area-inset-top, 0px)) max(18px, env(safe-area-inset-right, 0px)) 46px
+      max(18px, env(safe-area-inset-left, 0px));
+    background-position: 58% center;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.35rem, 12.5vw, 3.8rem);
   }
 
   .hero-actions,
@@ -956,19 +1026,35 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .hero-panel div {
+    padding: 14px 16px;
+  }
+
   .band {
-    padding: 56px 18px;
+    padding: 52px max(18px, env(safe-area-inset-right, 0px)) 52px max(18px, env(safe-area-inset-left, 0px));
   }
 
   .services,
   .link-grid,
-  .testimonial-grid,
-  .booking-form {
+  .testimonial-grid {
     grid-template-columns: 1fr;
-    padding: 0 18px 62px;
+    padding: 0 max(18px, env(safe-area-inset-right, 0px)) 56px max(18px, env(safe-area-inset-left, 0px));
+  }
+
+  .feature-link,
+  .service-card,
+  .testimonial,
+  .contact-item {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .feature-link {
+    align-content: start;
   }
 
   .booking-form {
+    grid-template-columns: 1fr;
     padding: 18px;
   }
 
@@ -978,6 +1064,8 @@ svg {
 
   .detail-card {
     grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 22px;
   }
 
   .price-row {
@@ -987,7 +1075,7 @@ svg {
 
   .service-card.feature {
     grid-column: auto;
-    min-height: 390px;
+    min-height: 360px;
   }
 
   .image-stack {
@@ -996,14 +1084,69 @@ svg {
 
   .image-stack img,
   .image-stack img:last-child {
-    height: 330px;
+    height: 300px;
   }
 
-  .contact-item {
-    min-height: auto;
+  .booking {
+    padding: 46px max(18px, env(safe-area-inset-right, 0px)) 46px max(18px, env(safe-area-inset-left, 0px));
+  }
+
+  .booking-system {
+    gap: 14px;
+  }
+
+  .booking-form input,
+  .booking-form select,
+  .booking-form textarea {
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .consent input {
+    min-height: 20px;
+  }
+
+  .note-card,
+  .booking-summary {
+    padding: 22px;
+  }
+
+  .map-band {
+    padding: 0 max(18px, env(safe-area-inset-right, 0px)) 56px max(18px, env(safe-area-inset-left, 0px));
+  }
+
+  .map-band iframe {
+    height: 360px;
   }
 
   .site-footer {
     flex-direction: column;
+    padding: 24px max(18px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px))
+      max(18px, env(safe-area-inset-left, 0px));
+  }
+
+  .site-footer div {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 390px) {
+  .brand strong {
+    max-width: 54vw;
+    font-size: 0.86rem;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 12.5vw, 3.4rem);
+  }
+
+  .hero-actions {
+    gap: 10px;
+  }
+
+  .button {
+    padding-right: 14px;
+    padding-left: 14px;
   }
 }
