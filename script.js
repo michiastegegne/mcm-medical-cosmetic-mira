@@ -4,9 +4,29 @@ const year = document.querySelector("[data-year]");
 const bookingForm = document.querySelector("[data-booking-form]");
 const summaryOutput = document.querySelector("[data-summary-output]");
 const copyBooking = document.querySelector("[data-copy-booking]");
+const progressBar = document.createElement("div");
+const floatingCta = document.createElement("a");
+
+progressBar.className = "scroll-progress";
+progressBar.setAttribute("aria-hidden", "true");
+document.body.append(progressBar);
+
+floatingCta.className = "floating-cta";
+floatingCta.href = "buchen.html";
+floatingCta.innerHTML = '<i data-lucide="calendar-check" aria-hidden="true"></i><span>Termin</span>';
+if (!window.location.pathname.endsWith("buchen.html")) {
+  document.body.append(floatingCta);
+}
 
 const setHeaderState = () => {
   header.classList.toggle("is-scrolled", document.body.classList.contains("inner-page") || window.scrollY > 12);
+};
+
+const setScrollProgress = () => {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+  progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+  floatingCta.classList.toggle("is-visible", floatingCta.isConnected && window.scrollY > 420);
 };
 
 if (menuToggle) {
@@ -40,7 +60,34 @@ document.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("scroll", setHeaderState, { passive: true });
+window.addEventListener("scroll", setScrollProgress, { passive: true });
 setHeaderState();
+setScrollProgress();
+
+const revealItems = document.querySelectorAll(
+  ".band, .link-grid, .service-card, .feature-link, .detail-card, .price-row, .testimonial, .contact-item, .booking, .booking-form, .booking-summary, .map-band",
+);
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
+  );
+
+  revealItems.forEach((item, index) => {
+    item.classList.add("reveal");
+    item.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 70}ms`);
+    revealObserver.observe(item);
+  });
+} else {
+  revealItems.forEach((item) => item.classList.add("is-revealed"));
+}
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -63,25 +110,42 @@ if (bookingForm && summaryOutput) {
   today.setDate(today.getDate() + 1);
   dateInput.min = today.toISOString().split("T")[0];
 
-  bookingForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const buildBookingMessage = () => {
     const data = Object.fromEntries(new FormData(bookingForm).entries());
     const lines = [
       "Hallo MCM Medical Cosmetic Mira, ich möchte gerne einen Termin anfragen:",
-      `Behandlung: ${data.service}`,
-      `Wunschdatum: ${data.date}`,
-      `Zeitfenster: ${data.time}`,
-      `Name: ${data.name}`,
-      `Kontakt: ${data.contact}`,
+      data.service ? `Behandlung: ${data.service}` : "Behandlung: noch offen",
+      data.date ? `Wunschdatum: ${data.date}` : "Wunschdatum: noch offen",
+      data.time ? `Zeitfenster: ${data.time}` : "Zeitfenster: noch offen",
+      data.name ? `Name: ${data.name}` : "Name: noch offen",
+      data.contact ? `Kontakt: ${data.contact}` : "Kontakt: noch offen",
       data.message ? `Nachricht: ${data.message}` : "",
     ].filter(Boolean);
-    const message = lines.join("\n");
+    return lines.join("\n");
+  };
 
-    localStorage.setItem("mcmBookingRequest", message);
+  const updateBookingPreview = () => {
+    const message = buildBookingMessage();
     summaryOutput.textContent = message;
     summaryOutput.classList.add("is-visible");
+    return message;
+  };
 
-    bookingForm.querySelector("button[type='submit']").textContent = "Anfrage vorbereitet";
+  bookingForm.addEventListener("input", updateBookingPreview);
+  bookingForm.addEventListener("change", updateBookingPreview);
+  updateBookingPreview();
+
+  bookingForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const message = updateBookingPreview();
+    localStorage.setItem("mcmBookingRequest", message);
+
+    const submitButton = bookingForm.querySelector("button[type='submit']");
+    submitButton.classList.add("is-complete");
+    submitButton.innerHTML = '<i data-lucide="check" aria-hidden="true"></i>Anfrage vorbereitet';
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
   });
 }
 
@@ -91,9 +155,12 @@ if (copyBooking && summaryOutput) {
     if (!message) return;
     try {
       await navigator.clipboard.writeText(message);
-      copyBooking.textContent = "Nachricht kopiert";
+      copyBooking.innerHTML = '<i data-lucide="check" aria-hidden="true"></i>Nachricht kopiert';
     } catch {
       copyBooking.textContent = "Manuell kopieren";
+    }
+    if (window.lucide) {
+      window.lucide.createIcons();
     }
   });
 }
