@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Termin bei MCM Medical Cosmetic Mira in Laufen anfragen." />
+    <title>Termin buchen | MCM Medical Cosmetic Mira</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="inner-page">
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html" aria-label="MCM Medical Cosmetic Mira Startseite">
+        <span class="brand-mark">MCM</span>
+        <span><strong>Medical Cosmetic Mira</strong><small>Laufen, Schweiz</small></span>
+      </a>
+      <nav class="nav" aria-label="Hauptnavigation">
+        <a href="behandlungen.html">Behandlungen</a>
+        <a href="preise.html">Preise</a>
+        <a href="kundenstimmen.html">Kundenstimmen</a>
+        <a href="buchen.html" aria-current="page">Buchen</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <a class="header-action" href="buchen.html"><i data-lucide="calendar-check" aria-hidden="true"></i>Termin</a>
+      <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-toggle>
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <p class="eyebrow">Buchung</p>
+        <h1>Termin-Anfrage senden</h1>
+        <p>Wähle Behandlung, Wunschdatum und Zeitfenster. Die Anfrage wird vorbereitet und kann direkt per Instagram gesendet werden.</p>
+      </section>
+
+      <section class="booking-system band">
+        <form class="booking-form" data-booking-form>
+          <label>
+            Behandlung
+            <select name="service" required>
+              <option value="">Bitte auswählen</option>
+              <option>Korean Lash & Brow Lifting</option>
+              <option>Madero Massage</option>
+              <option>G5 Cellulite Behandlung</option>
+              <option>Botox Beratung</option>
+              <option>Medical Cosmetic Beratung</option>
+              <option>Hyaluron Filler</option>
+              <option>Lippenaufbau</option>
+            </select>
+          </label>
+          <label>
+            Wunschdatum
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            Zeitfenster
+            <select name="time" required>
+              <option value="">Bitte auswählen</option>
+              <option>Vormittag</option>
+              <option>Mittag</option>
+              <option>Nachmittag</option>
+              <option>Abend</option>
+            </select>
+          </label>
+          <label>
+            Name
+            <input name="name" type="text" autocomplete="name" required />
+          </label>
+          <label>
+            Telefon oder Instagram
+            <input name="contact" type="text" autocomplete="tel" required />
+          </label>
+          <label class="full">
+            Nachricht
+            <textarea name="message" rows="5" placeholder="Kurz beschreiben, worum es geht."></textarea>
+          </label>
+          <label class="consent full">
+            <input name="consent" type="checkbox" required />
+            Ich bin einverstanden, dass meine Angaben zur Terminabstimmung verwendet werden.
+          </label>
+          <button class="button primary full" type="submit">
+            <i data-lucide="send" aria-hidden="true"></i>
+            Anfrage vorbereiten
+          </button>
+        </form>
+
+        <aside class="booking-summary" data-booking-summary>
+          <i data-lucide="calendar-days" aria-hidden="true"></i>
+          <h2>Deine Anfrage</h2>
+          <p>Fülle das Formular aus. Danach erscheint hier eine fertige Nachricht für Instagram.</p>
+          <div class="summary-output" data-summary-output></div>
+          <button class="button secondary dark" type="button" data-copy-booking>
+            <i data-lucide="copy" aria-hidden="true"></i>
+            Nachricht kopieren
+          </button>
+          <a class="button secondary dark" href="https://www.instagram.com/mcm_mira/" target="_blank" rel="noreferrer" data-instagram-link>
+            <i data-lucide="at-sign" aria-hidden="true"></i>
+            Auf Instagram senden
+          </a>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span data-year></span> MCM Medical Cosmetic Mira</p>
+      <div><a href="kontakt.html">Kontakt</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+    </footer>
+    <script src="https://unpkg.com/lucide@1.16.0/dist/umd/lucide.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
