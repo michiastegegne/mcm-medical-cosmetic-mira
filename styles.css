@@ -4,13 +4,13 @@
   --ink: #171717;
   --muted: #6b7280;
   --paper: #ffffff;
-  --soft: #f7f8f8;
+  --soft: #faf9f6;
   --line: rgba(23, 23, 23, 0.1);
-  --gold: #0f766e;
-  --rose: #0f766e;
+  --gold: #b79045;
+  --rose: #b79045;
   --sage: #334155;
-  --champagne: #eef7f5;
-  --accent: #0f766e;
+  --champagne: #f7f1e4;
+  --accent: #b79045;
   --white: #ffffff;
   --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
   --radius: 6px;
@@ -65,7 +65,7 @@ body.no-scroll {
   border-radius: 999px;
   color: var(--white);
   background: var(--accent);
-  box-shadow: 0 18px 38px rgba(15, 118, 110, 0.16);
+  box-shadow: 0 18px 38px rgba(183, 144, 69, 0.16);
   font-size: 0.92rem;
   font-weight: 800;
   opacity: 0;
@@ -426,7 +426,7 @@ h3 {
 .button.primary {
   color: var(--white);
   background: var(--accent);
-  box-shadow: 0 14px 34px rgba(15, 118, 110, 0.16);
+  box-shadow: 0 14px 34px rgba(183, 144, 69, 0.16);
 }
 
 .button.secondary {
@@ -461,7 +461,7 @@ h3 {
 .detail-card:hover,
 .testimonial:hover,
 .contact-item:hover {
-  border-color: rgba(15, 118, 110, 0.22);
+  border-color: rgba(183, 144, 69, 0.22);
   box-shadow: 0 18px 44px rgba(46, 32, 20, 0.1);
   transform: translateY(-3px);
 }
@@ -774,7 +774,7 @@ h3 {
   outline: 0;
   border-color: var(--accent);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+  box-shadow: 0 0 0 3px rgba(183, 144, 69, 0.12);
 }
 
 .booking-form button.is-complete {
@@ -1376,7 +1376,7 @@ svg {
   }
 }
 
-/* Minimal white theme */
+/* Minimal white and gold theme */
 .scroll-progress {
   background: var(--accent);
 }
@@ -1390,7 +1390,7 @@ body {
   border-color: var(--accent);
   color: var(--white);
   background: var(--accent);
-  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.16);
+  box-shadow: 0 12px 28px rgba(183, 144, 69, 0.16);
 }
 
 .site-header,
@@ -1421,7 +1421,7 @@ body {
 .site-header.is-scrolled .nav a[aria-current="page"],
 .site-header.is-open .nav a[aria-current="page"] {
   color: var(--accent);
-  background: rgba(15, 118, 110, 0.08);
+  background: rgba(183, 144, 69, 0.1);
 }
 
 .header-action,
@@ -1527,7 +1527,7 @@ body {
 .detail-card:hover,
 .testimonial:hover,
 .contact-item:hover {
-  border-color: rgba(15, 118, 110, 0.28);
+  border-color: rgba(183, 144, 69, 0.28);
   box-shadow: 0 16px 38px rgba(15, 23, 42, 0.06);
 }
 
@@ -1582,7 +1582,7 @@ body {
 .booking-form select:focus,
 .booking-form textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+  box-shadow: 0 0 0 3px rgba(183, 144, 69, 0.12);
 }
 
 .booking-form button.is-complete {
