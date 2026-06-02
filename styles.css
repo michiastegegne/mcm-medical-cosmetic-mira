@@ -1,18 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --ink: #1d1b1a;
-  --muted: #706a64;
-  --paper: #fffaf4;
-  --soft: #f4ede4;
-  --line: rgba(29, 27, 26, 0.14);
-  --gold: #b88a32;
-  --rose: #a75f66;
-  --sage: #687966;
-  --champagne: #f6ead8;
+  --ink: #171717;
+  --muted: #6b7280;
+  --paper: #ffffff;
+  --soft: #f7f8f8;
+  --line: rgba(23, 23, 23, 0.1);
+  --gold: #0f766e;
+  --rose: #0f766e;
+  --sage: #334155;
+  --champagne: #eef7f5;
+  --accent: #0f766e;
   --white: #ffffff;
-  --shadow: 0 24px 70px rgba(46, 32, 20, 0.18);
-  --radius: 8px;
+  --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+  --radius: 6px;
 }
 
 * {
@@ -44,7 +45,7 @@ body.no-scroll {
   left: 0;
   z-index: 60;
   height: 3px;
-  background: linear-gradient(90deg, #f6e4ad, #c98786, #a65e66);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   pointer-events: none;
@@ -63,8 +64,8 @@ body.no-scroll {
   border: 1px solid rgba(255, 255, 255, 0.56);
   border-radius: 999px;
   color: var(--white);
-  background: linear-gradient(135deg, #a65e66, #c98786);
-  box-shadow: 0 18px 38px rgba(46, 32, 20, 0.24);
+  background: var(--accent);
+  box-shadow: 0 18px 38px rgba(15, 118, 110, 0.16);
   font-size: 0.92rem;
   font-weight: 800;
   opacity: 0;
@@ -347,7 +348,7 @@ a {
 }
 
 .hero .eyebrow {
-  color: #f1d690;
+  color: var(--accent);
 }
 
 h1,
@@ -424,8 +425,8 @@ h3 {
 
 .button.primary {
   color: var(--white);
-  background: linear-gradient(135deg, #a65e66, #c98786);
-  box-shadow: 0 14px 34px rgba(127, 54, 62, 0.22);
+  background: var(--accent);
+  box-shadow: 0 14px 34px rgba(15, 118, 110, 0.16);
 }
 
 .button.secondary {
@@ -460,7 +461,7 @@ h3 {
 .detail-card:hover,
 .testimonial:hover,
 .contact-item:hover {
-  border-color: rgba(167, 95, 102, 0.22);
+  border-color: rgba(15, 118, 110, 0.22);
   box-shadow: 0 18px 44px rgba(46, 32, 20, 0.1);
   transform: translateY(-3px);
 }
@@ -771,13 +772,13 @@ h3 {
 .booking-form select:focus,
 .booking-form textarea:focus {
   outline: 0;
-  border-color: rgba(167, 95, 102, 0.72);
+  border-color: var(--accent);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(167, 95, 102, 0.12);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
 }
 
 .booking-form button.is-complete {
-  background: linear-gradient(135deg, var(--sage), #8e9d82);
+  background: var(--accent);
 }
 
 .consent {
@@ -979,7 +980,7 @@ h3 {
 }
 
 .booking .eyebrow {
-  color: #f1d690;
+  color: var(--accent);
 }
 
 .booking h2 {
@@ -1030,8 +1031,8 @@ h3 {
   justify-content: space-between;
   gap: 18px;
   padding: 26px clamp(20px, 6vw, 88px);
-  color: rgba(255, 255, 255, 0.72);
-  background: #151312;
+  color: var(--muted);
+  background: var(--white);
 }
 
 .site-footer p {
@@ -1372,6 +1373,273 @@ svg {
   .button {
     padding-right: 14px;
     padding-left: 14px;
+  }
+}
+
+/* Minimal white theme */
+.scroll-progress {
+  background: var(--accent);
+}
+
+body {
+  background: var(--white);
+}
+
+.floating-cta,
+.button.primary {
+  border-color: var(--accent);
+  color: var(--white);
+  background: var(--accent);
+  box-shadow: 0 12px 28px rgba(15, 118, 110, 0.16);
+}
+
+.site-header,
+.site-header.is-scrolled,
+.site-header.is-open {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 0 var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.brand-mark,
+.site-header.is-scrolled .brand-mark,
+.site-header.is-open .brand-mark {
+  border-color: var(--line);
+  color: var(--accent);
+  background: var(--white);
+  box-shadow: none;
+}
+
+.nav a:hover,
+.nav a:focus-visible,
+.nav a[aria-current="page"],
+.site-header.is-scrolled .nav a:hover,
+.site-header.is-scrolled .nav a:focus-visible,
+.site-header.is-open .nav a:hover,
+.site-header.is-open .nav a:focus-visible,
+.site-header.is-scrolled .nav a[aria-current="page"],
+.site-header.is-open .nav a[aria-current="page"] {
+  color: var(--accent);
+  background: rgba(15, 118, 110, 0.08);
+}
+
+.header-action,
+.site-header.is-scrolled .header-action,
+.site-header.is-open .header-action {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--white);
+}
+
+.menu-toggle,
+.site-header.is-scrolled .menu-toggle,
+.site-header.is-open .menu-toggle {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: none;
+}
+
+.hero {
+  min-height: auto;
+  padding-top: clamp(128px, 16vw, 188px);
+  padding-bottom: clamp(42px, 8vw, 78px);
+  color: var(--ink);
+  background: var(--white);
+}
+
+.hero-media {
+  inset: auto 0 0 auto;
+  width: min(46vw, 680px);
+  height: 100%;
+  opacity: 0.18;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.08)),
+    url("https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1800&q=82") center / cover;
+  filter: grayscale(0.35);
+}
+
+.hero-shade {
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.92) 52%, rgba(255, 255, 255, 0.68) 100%);
+}
+
+.hero .eyebrow,
+.eyebrow,
+.feature .service-tag,
+.booking .eyebrow {
+  color: var(--accent);
+}
+
+.hero-content > p,
+.page-hero p:last-child {
+  color: var(--muted);
+}
+
+.button.secondary {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--white);
+}
+
+.hero-panel {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--white);
+  backdrop-filter: none;
+}
+
+.page-hero {
+  color: var(--ink);
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.band,
+.split {
+  background: var(--white);
+}
+
+.link-grid,
+.services,
+.testimonial-grid,
+.map-band {
+  background: var(--white);
+}
+
+.feature-link,
+.service-card,
+.detail-card,
+.price-table,
+.testimonial,
+.contact-item,
+.booking-form,
+.note-card,
+.booking-summary {
+  border-color: var(--line);
+  background: var(--white);
+  box-shadow: none;
+}
+
+.feature-link:hover,
+.feature-link:focus-visible,
+.service-card:hover,
+.detail-card:hover,
+.testimonial:hover,
+.contact-item:hover {
+  border-color: rgba(15, 118, 110, 0.28);
+  box-shadow: 0 16px 38px rgba(15, 23, 42, 0.06);
+}
+
+.feature-link svg,
+.detail-card > svg,
+.service-card > svg,
+.contact-item svg,
+.note-card svg,
+.booking-summary > svg,
+.check-list svg {
+  color: var(--accent);
+}
+
+.service-card.feature {
+  color: var(--ink);
+  background: var(--soft);
+}
+
+.service-card.feature::after {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.48));
+}
+
+.feature p {
+  color: var(--muted);
+}
+
+.price-row strong,
+.detail-card a,
+.stars {
+  color: var(--accent);
+}
+
+.booking {
+  color: var(--ink);
+  background: var(--soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.booking p {
+  color: var(--muted);
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea,
+.summary-output {
+  background: var(--white);
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.booking-form button.is-complete {
+  background: var(--accent);
+}
+
+.consent input {
+  accent-color: var(--accent);
+}
+
+.button.secondary.dark {
+  border-color: var(--line);
+  color: var(--ink);
+  background: var(--white);
+}
+
+.site-footer {
+  color: var(--muted);
+  background: var(--white);
+  border-top: 1px solid var(--line);
+}
+
+.site-footer a {
+  color: var(--ink);
+}
+
+@media (max-width: 920px) {
+  .nav {
+    background: var(--white);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  }
+
+  .nav a::after {
+    background: var(--accent);
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(108px + env(safe-area-inset-top, 0px));
+    padding-bottom: 42px;
+  }
+
+  .hero-media {
+    width: 100%;
+    opacity: 0.1;
+  }
+
+  .hero-shade {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .site-header.is-open .menu-toggle,
+  .site-header.is-scrolled .menu-toggle {
+    border-color: var(--line);
+    box-shadow: none;
   }
 }
 
